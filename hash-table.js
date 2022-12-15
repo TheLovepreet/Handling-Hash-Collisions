@@ -10,16 +10,30 @@ class KeyValuePair {
 
 class HashTable {
 
-  constructor(numBuckets = 4) {
+  constructor(capacity, count = 0,data = []) {
     // Your code here
+    this.capacity = capacity;
+    this.count = count;
+    this.data = data;
+    for(let i = 0; i <  capacity; i++){
+      data.push(null);
+    }
   }
 
   hash(key) {
     // Your code here
+    let theDecimalNumbers = 0;
+    let sha256Code = sha256(key);
+    sha256Code = sha256Code.slice(0,8);
+    for(let i = 0; i < 64; i += 8){
+    theDecimalNumbers = parseInt(sha256Code , 16);
+    }
+    return theDecimalNumbers;
   }
 
   hashMod(key) {
     // Your code here
+    return this.hash(key) % this.capacity;
   }
 
   insertNoCollisions(key, value) {
