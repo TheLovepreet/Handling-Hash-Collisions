@@ -49,7 +49,17 @@ class HashTable {
 
   insertWithHashCollisions(key, value) {
     // Your code here
-  
+    let newPair = new KeyValuePair(key,value);
+    let Index = this.hashMod(key);
+    if(this.data[Index] !== null){
+      newPair.next = this.data[Index];
+      this.data[Index] = newPair;
+      this.count++;
+    }
+    else{
+    this.data[Index] = newPair;
+    this.count++;
+    }
   }
   
 
